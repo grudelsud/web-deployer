@@ -6,6 +6,10 @@ module.exports = Base.extend({
 		"ver_httpd": "httpd version"
 	},
 	initialize: function() {
+
+		Base.prototype.initialize.apply(this, arguments);
+
+
 		var that = this;
 		var exec;
 		try {
@@ -24,6 +28,7 @@ module.exports = Base.extend({
 			var lines = stdout.split('\n');
 			that.set("ver_httpd", lines[0]);
 		});
+
 	},
 	url: '/',
 });
