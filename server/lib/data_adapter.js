@@ -13,7 +13,7 @@ function DataAdapter(options) {
 
 //
 // `req`: Actual request object from Express/Connect.
-// `api`: Object describing API call; properites including 'path', 'query', etc.
+// `api`: Object describing API call; properties including 'path', 'query', etc.
 //        Passed to `url.format()`.
 // `options`: (optional) Options.
 // `callback`: Callback.
@@ -56,9 +56,12 @@ DataAdapter.prototype.request = function(req, api, options, callback) {
 };
 
 DataAdapter.prototype.apiDefaults = function(api) {
-  var urlOpts, basicAuth, authParts;
+  var urlOpts, basicAuth, authParts, apiHost;
 
-  urlOpts = _.defaults(_.pick(api, 'protocol', 'port', 'query'), _.pick(this.options, ['protocol', 'port', 'host']));
+  // Can specify a particular API to use, falling back to default.
+  apiHost = this.options[api.api] || this.options['default'] || this.options || {};
+
+  urlOpts = _.defaults(_.pick(api, 'protocol', 'port', 'query'), _.pick(apiHost, ['protocol', 'port', 'host']));
   urlOpts.pathname = api.path || api.pathname;
 
   api = _.defaults(api, {

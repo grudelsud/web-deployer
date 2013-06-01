@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
     bgShell: {
       runNode: {
-        cmd: './node_modules/nodemon/nodemon.js index.js',
+        cmd: 'node ./node_modules/nodemon/nodemon.js index.js',
         bg: true
       }
     },
@@ -93,8 +93,8 @@ module.exports = function(grunt) {
           dest: 'public/mergedAssets.js',
           src: [
             'app/**/*.js',
-            rendrDir + '/client/**/*.coffee',
-            rendrDir + '/shared/**/*.coffee'
+            rendrDir + '/client/**/*.js',
+            rendrDir + '/shared/**/*.js'
           ]
         }]
       }
